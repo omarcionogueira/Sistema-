@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
   const [usuario, setUsuario] = useState('');
@@ -9,8 +9,10 @@ function Login() {
   function autenticar(e) {
     e.preventDefault();
 
-    // Validação simples
-    if (usuario === 'admin' && senha === '123') {
+    const usuarioSalvo = localStorage.getItem('usuario');
+    const senhaSalva = localStorage.getItem('senha');
+
+    if (usuario === usuarioSalvo && senha === senhaSalva) {
       navegar('/home');
     } else {
       alert('Usuário ou senha inválidos');
@@ -35,6 +37,9 @@ function Login() {
         />
         <button type="submit">Entrar</button>
       </form>
+      <p>
+        Ainda não tem conta? <Link to="/cadastro">Cadastre-se aqui</Link>
+      </p>
     </div>
   );
 }
